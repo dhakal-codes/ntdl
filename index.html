@@ -20,11 +20,47 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <style>
+      .wrapper {
+        background: linear-gradient(rgba(255, 0, 0, 0.476), rgb(202, 92, 202));
+        height: 100vh;
+      }
+    </style>
     <title>Nah List</title>
   </head>
   <body>
-    <div class="wrapper">
-      <h1>Nah List</h1>
+    <div class="wrapper pt-5">
+      <div class="container">
+        <h1 class="text-center">Nah List</h1>
+
+        <!-- form section  -->
+        <form action="" class="border p-5 rounded shdaow mt-5">
+          <div class="row g-2">
+            <div class="col-md-7">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your task here"
+                aria-label="Task"
+                name="task"
+              />
+            </div>
+            <div class="col-md-2">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="40"
+                aria-label="Last name"
+                name="hr"
+                min="1"
+              />
+            </div>
+            <div class="col-md-3 d-grid">
+              <button class="btn btn-primary">Add New Task</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
