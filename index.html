@@ -34,7 +34,11 @@
         <h1 class="text-center">Nah List</h1>
 
         <!-- form section  -->
-        <form action="" class="border p-5 rounded shdaow mt-5">
+        <form
+          onsubmit="handleOnSubmit(this)"
+          action="javascript:void(0)"
+          class="border p-5 rounded shadow-lg mt-5"
+        >
           <div class="row g-2">
             <div class="col-md-7">
               <input
@@ -158,9 +162,16 @@
                 </tr>
               </tbody>
             </table>
+
+            <div class="alert alert-success">You could have saved = 50 hrs</div>
           </div>
+        </div>
+        <div class="alert alert-success">
+          The total hours allocated = 100 hrs
         </div>
       </div>
     </div>
+
+    <script src="./script.js"></script>
   </body>
 </html>
