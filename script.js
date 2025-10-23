@@ -5,7 +5,7 @@ const handleOnSubmit = (event) => {
   const task = newForm.get("task");
   const hr = newForm.get("hr");
 
-  const object = { task, hr };
+  const object = { task, hr, id: generateUniqueId() };
 
   taskList.push(object);
   displayEntryList();
@@ -33,4 +33,16 @@ const displayEntryList = () => {
                 </tr>`;
   });
   entryElm.innerHTML = str;
+};
+
+// creating unique ids for each task item
+
+const generateUniqueId = (length = 10) => {
+  const str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let id = "";
+  for (let i = 0; i < 10; i++) {
+    const randomIndex = Math.floor(Math.random() * str.length);
+    id += str[randomIndex];
+  }
+  return id;
 };
