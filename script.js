@@ -12,7 +12,6 @@ const handleOnSubmit = (event) => {
 };
 
 const displayEntryList = () => {
-  console.log(taskList);
   let str = "";
 
   const entryElm = document.getElementById("entryList");
@@ -23,7 +22,9 @@ const displayEntryList = () => {
                   <td>${item.task}</td>
                   <td>${item.hr}hr</td>
                   <td class="text-end">
-                    <button class="btn btn-danger">
+                    <button onclick="handleonDelete('${
+                      item.id
+                    }')"class="btn btn-danger">
                       <i class="fa-solid fa-trash"></i>
                     </button>
                     <button class="btn btn-success">
@@ -45,4 +46,13 @@ const generateUniqueId = (length = 10) => {
     id += str[randomIndex];
   }
   return id;
+};
+
+// deleting task item from the list
+
+const handleonDelete = (id) => {
+  if (window.confirm("Are you sure you want to delete this task?")) {
+    taskList = taskList.filter((item) => item.id !== id);
+    displayEntryList();
+  }
 };
