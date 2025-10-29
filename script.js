@@ -1,9 +1,13 @@
 let taskList = [];
+const entryListElm = document.getElementById("entryList");
+const badListElm = document.getElementById("badList");
 
-const handleOnSubmit = (event) => {
-  const newForm = new FormData(event);
+const hrsPerWek = 24 * 7;
+
+const handleOnSubmit = (form) => {
+  const newForm = new FormData(form);
   const task = newForm.get("task");
-  const hr = newForm.get("hr");
+  const hr = +newForm.get("hr");
 
   const object = {
     task,
@@ -12,16 +16,18 @@ const handleOnSubmit = (event) => {
     type: "entry",
   };
 
-  taskList.push(object);
+  //check if there is enough hours left
+  const getArgTtl = totalAllocation();
+  if (getArgTtl + hr > hrWkly) {
+    return alert("Sorry boss, not enought time left to fit this task");
+  }
+  taskList.push(obj);
   displayEntryList();
-  displayBadList();
 };
 
 const displayEntryList = () => {
   let str = "";
-  console.log(taskList);
 
-  const entryElm = document.getElementById("entryList");
   const entryList = taskList.filter((item) => item.type === "entry");
 
   entryList.map((item, index) => {
@@ -44,13 +50,13 @@ const displayEntryList = () => {
                 </tr>`;
   });
   entryElm.innerHTML = str;
+  totalAllocation();
 };
 
 // bad list
 
 const displayBadList = () => {
   let str = "";
-  console.log(taskList);
 
   const badElm = document.getElementById("badList");
   const badList = taskList.filter((item) => item.type === "bad");
@@ -76,6 +82,10 @@ const displayBadList = () => {
                 </tr>`;
   });
   badElm.innerHTML = str;
+  document.getElementById("savedHrsElm").innerText = badList.reduce(
+    (acc, item) => acc + item.hr,
+    0
+  );
 };
 // creating unique ids for each task item
 
@@ -110,4 +120,10 @@ const switchTask = (id, type) => {
   });
   displayEntryList();
   displayBadList();
+};
+
+const totalAllocation = () => {
+  const ttlHrs = taskList.reduce((acc, item) => acc + item.hr, 0);
+  document.getElementById("totlHrs").innerText = ttlHrs;
+  return ttlHrs;
 };
